@@ -1,2 +1,2 @@
-# BoulderProlotherapy.github.io
+# boulderprolotherapy.github.io
 BoulderProlotherapy
