@@ -314,7 +314,9 @@ jQuery(document).ready(function () {
                .mouseover(function() {
                     $('#' + index).addClass('active');
                 });
-
+    // .hover(function () {
+    //         $('#' + index).toggleClass('active');
+    //     });
             map.append(point);
 
         $this
@@ -466,5 +468,32 @@ jQuery(document).ready(function () {
     });
 
 
+    function initMap() {
+        var map;
+        var pos = {lat: 40.017731, lng:  -105.252123};
+        var opt = {
+            center: pos,
+            zoom: 12
+        };
 
+        var popupContent = `<div class="contacts_popup"> Здесь могло быть что то написано </div>`
+        map = new google.maps.Map(document.querySelector('.google-maps'), opt);
+        var marker = new google.maps.Marker({
+            position: pos,
+            map: map,
+            title: "Убери мышку прочь",
+            icon: './images/map@2x.png',
+            animation: google.maps.Animation.DROP
+        });
+        infowindow = new google.maps.InfoWindow({
+            content: popupContent
+        });
+        marker.addListener('click', function() {
+            infowindow.open(map, marker);
+        });
+        $.getJSON("./json/style.json", function(data) {
+            map.setOptions({styles: data});
+        });
+    }
+    initMap();
 });
